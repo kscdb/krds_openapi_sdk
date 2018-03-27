@@ -124,7 +124,7 @@ class KRDSClient(_BaseClient):
     @_api_define
     def CreateDBInstance(self, DBInstanceClass, DBInstanceName, Engine,
                          EngineVersion, MasterUserName, MasterUserPassword,
-                         DBInstanceType, VpcId,
+                         DBInstanceType, PubliclyAccessible, VpcId,
                          SubnetId, BillType=BillType.YEAR_MONTH,
                          PreferredBackupTime=None, Port='3306', EndTime=None, Duration=1, DurationUnit=DurationUnit.M,
                          AvailabilityZone=None,  # type: list # ex: ['cn-beijing-6a','cn-beijing-6b']
