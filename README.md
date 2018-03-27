@@ -22,14 +22,14 @@ krds_client = KRDSClient('your_ak', 'your_sk', 'your_service_region')
 ```python
 http_code, response = krds_client.CreateDBInstance(DBInstanceClass='db.ram.1|db.disk.10', DBInstanceName='test', Engine='mysql',
                                  EngineVersion='5.6', MasterUserName='test', MasterUserPassword='Test123456',
-                                 DBInstanceType=DBInstanceType.HA, VpcId='b33a2276-64a8-4c04-b28e-da253c8add32',
+                                 DBInstanceType=DBInstanceType.HA, PubliclyAccessible=True, VpcId='b33a2276-64a8-4c04-b28e-da253c8add32',
                                  SubnetId='c2e0abd7-13df-461a-bd8d-3b92faebf111', BillType=BillType.DAY)
 ```
 * 如请求需添加额外的请求头，可使用additional_headers参数传入字典类型的kv对，例如：
 ```python
 http_code, response = krds_client.CreateDBInstance(DBInstanceClass='db.ram.1|db.disk.10', DBInstanceName='test', Engine='mysql',
                                  EngineVersion='5.6', MasterUserName='test', MasterUserPassword='Test123456',
-                                 DBInstanceType=DBInstanceType.HA, VpcId='b33a2276-64a8-4c04-b28e-da253c8add32',
+                                 DBInstanceType=DBInstanceType.HA, PubliclyAccessible=True, VpcId='b33a2276-64a8-4c04-b28e-da253c8add32',
                                  SubnetId='c2e0abd7-13df-461a-bd8d-3b92faebf111', BillType=BillType.DAY, additional_headers={'Accept': 'application/json'})
 ```
 * {'Accept': 'application/json'} 已作为默认头提供，会自动发送，可以不必手动添加
