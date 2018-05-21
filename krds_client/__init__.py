@@ -1,6 +1,7 @@
 from functools import partial as _partial
 
 from base_client import BaseClient as _BaseClient
+from Account import *
 
 
 def _api_define(func):

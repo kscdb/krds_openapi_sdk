@@ -24,3 +24,70 @@ krds_client = KRDSClient('your_ak', 'your_sk', 'your_service_region')
 # r = krds_client.DeleteDBBackup('a2d67d80-d011-4856-8841-d7362f8c5779')
 #
 # print r
+
+# New an API Client
+accountAPI = AccountAPI('your_ak', 'your_sk', 'your_service_region')
+
+# add an account for instance
+# @return
+# True: add Success
+# raise HttpError : Failed
+account = Account(DBInstanceIdentifier="341dfada-4a92-41cc-a2b1-ca7bec5f3d03", User="12345678", Host="%", Password="wwwww12345DDD")
+accountAPI.addAccount(account)
+
+
+# List All Accounts for an Instance
+# @return
+# A List of Account type
+accounts = accountAPI.listAccount(DBInstanceIdentifier="341dfada-4a92-41cc-a2b1-ca7bec5f3d03")
+for each_account in accounts:
+    print each_account.getUser(), each_account.getHost()
+
+
+# get Supported Privileges for instance
+# @return
+# Privileges type
+supportedPrivileges = accountAPI.listSupportPrivileges(DBInstanceIdentifier="341dfada-4a92-41cc-a2b1-ca7bec5f3d03")
+print supportedPrivileges.toString()
+
+
+# describe (privileges) for an account
+# @return
+# Account type
+account = Account(DBInstanceIdentifier="341dfada-4a92-41cc-a2b1-ca7bec5f3d03", User="wwmm", Host="%")
+account = accountAPI.describeAccount(account)
+print account.getPrivileges().getGlobalPriv()
+if account.getPrivileges().getColPriv():
+    for each_colpriv in account.getPrivileges().getColPriv():
+        print each_colpriv.getDb(), each_colpriv.getTb(), each_colpriv.getCol(), each_colpriv.getPriv()
+else:
+    print None
+
+
+# add privileges for account
+# Usage:
+# 1. New An Account
+# 2. Add COLUMN/TABLE/DATABASE/GLOBAL Privileges for the Account.
+# 3. Use AccountAPI.addPrivilegesForAccount(account)
+account = Account(DBInstanceIdentifier="341dfada-4a92-41cc-a2b1-ca7bec5f3d03", User="12345678", Host="%",
+                  Password="wwwww12345DDD")
+# add COLUMN privileges
+priv_detail = Privileges.PrivDetail(db="test", tb="test", col="id", priv=["INSERT"])
+account.getPrivileges().addColPriv(priv_detail)
+# add TABLE privileges
+priv_detail = Privileges.PrivDetail(db="test", tb="test", priv=["INSERT"])
+account.getPrivileges().addTbPriv(priv_detail)
+# add DATABASE privileges()
+priv_detail = Privileges.PrivDetail(db="test", priv=["INSERT"])
+account.getPrivileges().addDbPriv(priv_detail)
+# add GLOBAL privileges
+account.getPrivileges().addGlobalPriv("INSERT")
+# call API
+accountAPI.addPrivilegesForAccount(account)
+
+
+# delete an account
+# @return
+# True: delete Success
+# raise HttpError : Failed
+accountAPI.deleteAccount(account)
