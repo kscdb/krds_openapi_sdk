@@ -1,7 +1,7 @@
 import hashlib
 import hmac
 import urllib
-
+import json
 import datetime
 import requests
 
@@ -162,8 +162,9 @@ class BaseClient(object):
         if isinstance(dict_request_parameters, str):
             dict_request_parameters = eval(dict_request_parameters)
         dict_request_parameters['Version'] = self.version
+        dict_request_parameters["Action"] = target
 
-        request_parameters = "Action=%s&" % target + '&'.join(
+        request_parameters = '&'.join(
             ["%s=%s" % (k, urllib.quote(str(dict_request_parameters[k]), ''))
              for k in sorted(dict_request_parameters.keys())])
         url += request_parameters
@@ -173,4 +174,7 @@ class BaseClient(object):
         headers = composer.get_headers(host=self.host, region=self.region,
                                        payload="", additional_signing_headers=headers)
         r = requests.get(url, headers=headers)
+        print "[" + target + "]", url
+        print "[" + target + "]", r.status_code, r.content
         return r
+
