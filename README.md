@@ -2,7 +2,7 @@
 Kingsoft Cloud Service OpenAPI SDK for RDS
 
 # OpenAPI文档
-该SDK是对RDS OpenAPI调用的封装，可点此跳转到金山云RDS [OpenAPI文档](https://docs.ksyun.com/directories/376)
+该SDK是对RDS OpenAPI调用的封装，可点此跳转到金山云RDS [OpenAPI文档](https://docs.ksyun.com/documents/323)
 
 # 安装说明
 * 从github clone源码
